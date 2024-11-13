@@ -1,0 +1,70 @@
+{% extends "learning_log/base.html" %}
+
+{% block content %}
+    <header class="topics-header">
+        <h1>Topics of Interest</h1>
+    </header>
+
+    <div class="topics-container">
+        <ul class="topics-list">
+            {% for topic in topics %}
+                <li class="topic-item">
+                    <a href="{% url 'learning_log:topic' topic.id %}">{{ topic }}</a>
+                </li>
+            {% empty %}
+                <li class="topic-item">No topics have been added yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="{% url 'learning_log:new_topic' %}">Add a new topic</a>
+    
+{% endblock content %}
+
+{% block extra_styles %}
+<style>
+    .topics-header {
+        text-align: center;
+        padding: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .topics-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .topics-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .topic-item {
+        margin: 15px 0;
+        padding: 15px;
+        border-left: 5px solid #4CAF50;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s;
+    }
+
+    .topic-item:hover {
+        background-color: #e9ffe9;
+    }
+
+    .topic-item a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1.2em;
+    }
+
+    .topic-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock extra_styles %}
